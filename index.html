@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CapstoneApp</title>
+  <meta name="description" content="">
+  <meta name="author" content="Gabby">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
+  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" id="theme">
+  <!--[if lt IE 9]>
+  <script src="lib/js/html5shiv.js"></script>
+  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class='' data-state='' id='slide-1'>
+  <h2>My Capstone App for Data Science Course</h2>
+  <h3>Predicting the next word based on Input</h3>
+
+<p>Author: Gabby</p>
+
+<p>Date: April 26th, 2016</p>
+
+</section>
+<section class='' data-state='' id='slide-2'>
+  <h3>Predicting the next word based on Input</h3>
+  <p>Introduction</p>
+
+<ol>
+<li>The purpose of this app is to predict the next word based on the input text.</li>
+<li>The prediction algorithm behind this app is essentially an N-gram language model, which is derived with data from Swiftkey.</li>
+<li>How to use the app: User could input text (multiple words), then click submit buttion; the app will predict the next word by showing 3 possible results with decreasing probability.</li>
+</ol>
+
+</section>
+<section class='' data-state='' id='slide-3'>
+  <h3>SwiftKey data analysis</h3>
+  <p>Data summary</p>
+
+<ol>
+<li>Three datasets contain information from blogs, news and twitter of Swiftkey database are cleaned (by removing extotic characters, numbers, punctuation and profanity) and then analyzed to understand the frequency of word and word pairs.</li>
+<li>The datasets are farely large, with each ranging from 160 to 200 mb; on average, there are 10 to 40 words per line in these datasets. </li>
+<li>Due to the memory capacity constraint on my computer, only 40% randomly sampled data is used to train the model and the rest is kept as testing data.</li>
+</ol>
+
+</section>
+<section class='' data-state='' id='slide-4'>
+  <h3>Modeling methodology and algorithm</h3>
+  <p>N-gram language model, stupid backoff inplementation and Kneser-Ney smoothing</p>
+
+<ol>
+<li>Build basic 1-gram, 2-gram, 3-gram and 4-gram models (with the cleaned sub-dataset) for predicting the next word based on the previous 1, 2, or 3 words.</li>
+<li>Build the final model to handel unseen N-grams, by using stupid backoff implementation: starting with 4-gram, use the last three entered words to predict the next one; if no 4-gram found, backoff to 3-gram; if no 3-gram found then backoff to 2-gram; if no 2-gram found backoff to unigram.</li>
+<li>Finally, Kneser-Ney smoothing method is applied to discount the probability of lower order gram models during the backoff implementation.</li>
+</ol>
+
+</section>
+<section class='' data-state='' id='slide-5'>
+  <h3>CapstoneApp overview</h3>
+  <p>Screenshot of the App</p>
+
+<div id="bg">
+  <img src="ScreenShot1.png" alt="">
+</div> 
+
+</section>
+    </div>
+  </div>
+</body>
+  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
+  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
+  <script>
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+    theme: Reveal.getQueryHash().theme || 'default', 
+    transition: Reveal.getQueryHash().transition || 'default', 
+    dependencies: [
+    // Cross-browser shim that fully implements classList -
+    // https://github.com/eligrey/classList.js/
+      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
+      // Zoom in and out with Alt+click
+      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Speaker notes
+      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+      // Remote control your reveal.js presentation using a touch device
+      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+      ]
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>
